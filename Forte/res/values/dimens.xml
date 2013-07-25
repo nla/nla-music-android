@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Image Sizes -->
+    <dimen name="logoHeight">100dp</dimen>
+    <dimen name="logoBarHeight">3dp</dimen>
+    <dimen name="appImageHeight">65dp</dimen>
+    
+    <!-- Text Sizes -->
+    <dimen name="smallFont">12sp</dimen>
+    <dimen name="xSmallFont">15sp</dimen>
+    <dimen name="mediumFont">18sp</dimen>
+    <dimen name="largeFont">22sp</dimen>
+    <dimen name="veryLargeFont">30sp</dimen>
+    <dimen name="veryVeryLargeFont">36sp</dimen>
+    
+</resources>

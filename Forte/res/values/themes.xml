@@ -1,0 +1,15 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <color name="themeBar">#ffE98437</color>
+    
+    <style name="Theme.Default" parent="@style/Theme.Sherlock">
+        <item name="android:editTextStyle">@style/BlackTextAppearance</item>
+    </style>
+
+    <style name="Theme.NoTitle" parent="@style/Theme.Sherlock.NoActionBar">
+        <item name="android:editTextStyle">@style/BlackTextAppearance</item>
+    </style>
+
+    <style name="BlackTextAppearance" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">#000</item>
+    </style>
+</resources>

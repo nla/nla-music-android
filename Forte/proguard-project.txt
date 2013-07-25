@@ -1,0 +1,87 @@
+-libraryjars <java.home>/lib/rt.jar
+
+-optimizationpasses 20
+-overloadaggressively
+-dontpreverify
+
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
+-allowaccessmodification
+-repackageclasses ''
+-renamesourcefileattribute SourceFile
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+
+-dontnote
+-dontwarn android.support.**
+-dontwarn android.annotation.SuppressLint
+-dontwarn org.xmlpull.v1.**
+-dontwarn org.bouncycastle.**
+
+# To remove debug logs.
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+}
+# Preserve the serializable classes
+-keep class * implements java.io.Serializable
+-keepclassmembers class * implements java.io.Serializable {*;}
+
+# Preserve all fundamental application classes.
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public interface com.android.vending.licensing.ILicensingService
+
+# Preserve the activity classes and its associated functionality
+-keep class com.actionbarsherlock.** { *; } 
+-keep interface com.actionbarsherlock.** { *; }
+-keep public class * extends au.gov.nla.forte.activity.GlobalActivity 
+-keep public class * extends android.app.ListActivity
+-keep public class * extends android.app.Activity
+-keep public class * extends com.actionbarsherlock.app.SherlockFragmentActivity
+-keep public class * extends android.database.sqlite.SQLiteOpenHelper
+-keepclasseswithmembers,allowshrinking class * {
+    native <methods>;
+}
+-keepclassmembers class * {
+  public void *(android.view.View);
+}
+-keep public class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context,android.util.AttributeSet);
+    public <init>(android.content.Context,android.util.AttributeSet,int);
+    public void set*(...);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context,android.util.AttributeSet);
+    public <init>(android.content.Context,android.util.AttributeSet,int);
+}
+
+-keepclassmembers class * extends android.content.Context {
+   public void *(android.view.View);
+   public void *(android.view.MenuItem);
+}
+
+# Preserve the generated classes
+-keep class **.R$*
+-keep public class **.R*.java {*;}
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+# Preserve the utility methods and enums
+-keep public enum *
+-keepclassmembers enum  * {
+	<fields>;
+	private <fields>;
+	public ** getKey(...);
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+# Preserve the external library stuff
+-keep class android.support.v4.** { *; }
+-keep class com.google.myjson.Gson {*;}

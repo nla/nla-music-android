@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ImageView
+      	android:id="@+id/nla_image"
+       	android:layout_width="150dp"
+       	android:layout_height="150dp"
+       	android:layout_centerHorizontal="true"
+       	android:layout_marginTop="100dp"
+       	android:layout_marginLeft="20dp"
+       	android:layout_marginRight="20dp"
+       	android:contentDescription="@string/tag_line"
+       	android:src="@drawable/image_nla_logo_white"
+       	android:scaleType="fitXY" />
+    
+    <TextView
+    	android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nla_image"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/tag_line"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/smallFont"
+        android:textStyle="bold" />
+    
+
+</RelativeLayout>

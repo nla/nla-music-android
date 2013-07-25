@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+        <ScrollView
+            android:id="@+id/year_nav"
+    		android:layout_width="75dp"
+    		android:layout_height="match_parent" >
+
+    		<LinearLayout
+    		    android:id="@+id/year_list"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:orientation="vertical">
+        		
+    		    <ImageButton
+        			android:id="@+id/favourites"
+        			android:layout_width="match_parent"
+        			android:layout_height="wrap_content"
+        			android:src="@drawable/icon_star"
+        			android:contentDescription="Favourites" />
+    		    
+    		           
+    		</LinearLayout>
+    	
+    	</ScrollView>
+        <!-- 
+    	<include layout="@layout/year_list"/>
+    	-->
+    	
+    
+ 
+    <au.gov.nla.forte.woozzu.IndexableListView
+        android:id="@+id/custom_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:dividerHeight="1dp"
+        android:layout_toRightOf="@+id/year_nav" />
+    
+</RelativeLayout>

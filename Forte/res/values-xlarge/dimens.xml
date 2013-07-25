@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="smallFont">20sp</dimen>
+    <dimen name="xSmallFont">25sp</dimen>
+    <dimen name="mediumFont">30sp</dimen>
+    <dimen name="largeFont">40sp</dimen>
+    <dimen name="veryLargeFont">50sp</dimen>
+    <dimen name="veryVeryLargeFont">60sp</dimen>   
+</resources>

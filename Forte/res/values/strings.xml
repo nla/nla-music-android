@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_store_name">Forte</string>
+    <string name="app_name">Forte</string>
+    <string name="tag_line">Discover our collection of sheet music</string>
+    <string name="menu_information">Info</string>
+</resources>
