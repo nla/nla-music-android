@@ -31,7 +31,7 @@ public class StartActivity extends GlobalActivity {
 	
 	private void goToCoverDisplayActivity() {
 		Intent i = new Intent(this, CoverDisplayActivity.class);
-		i.putExtra(CoverDisplayActivity.YEAR, "1970");
+		i.putExtra(CoverDisplayActivity.YEAR, CoverDisplayActivity.DEFAULT_YEAR);
 		startActivity(i);
 		finish();
 	}

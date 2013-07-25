@@ -20,23 +20,27 @@
         			android:layout_width="match_parent"
         			android:layout_height="wrap_content"
         			android:src="@drawable/icon_star"
-        			android:contentDescription="Favourites" />
+        			android:contentDescription="@string/app_name" />
     		    
-    		           
     		</LinearLayout>
     	
     	</ScrollView>
-        <!-- 
-    	<include layout="@layout/year_list"/>
-    	-->
-    	
+        
+        <RelativeLayout
+            android:id="@+id/nla_logo"
+    		android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:layout_toRightOf="@+id/year_nav" >
+    		
+    		<include layout="@layout/nla_logo"/>
+    		
+    	</RelativeLayout>
     
- 
-    <au.gov.nla.forte.woozzu.IndexableListView
-        android:id="@+id/custom_list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:dividerHeight="1dp"
-        android:layout_toRightOf="@+id/year_nav" />
+    	<au.gov.nla.forte.woozzu.IndexableListView
+	        android:id="@+id/custom_list"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:dividerHeight="1dp"
+	        android:layout_toRightOf="@+id/year_nav" />
     
 </RelativeLayout>

@@ -26,11 +26,14 @@ public class CoverDisplayActivity extends GlobalActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cover_display);
       
         String year = getIntent().getExtras().getString(YEAR);
         if (year.equals(DEFAULT_YEAR)) {
-        	setContentView(R.layout.activity_start);
+        	findViewById(R.id.custom_list).setVisibility(View.INVISIBLE);
+        	addNavigationYearButtons();
         } else {
+        	findViewById(R.id.nla_logo).setVisibility(View.INVISIBLE);
         	displayYearList(year);
         	addNavigationYearButtons();
         }
@@ -62,7 +65,7 @@ public class CoverDisplayActivity extends GlobalActivity {
     }
     
     private void displayYearList(String year) {
-    	setContentView(R.layout.activity_cover_display);
+    	
         ArrayList<Score> scores = getScoresForYear(year);
         final ListView lv1 = (ListView) findViewById(R.id.custom_list);
         lv1.setAdapter(new CustomListAdapter(this, scores));
