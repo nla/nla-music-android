@@ -2,10 +2,12 @@ package au.gov.nla.forte.task;
 
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.http.AndroidHttpClient;
