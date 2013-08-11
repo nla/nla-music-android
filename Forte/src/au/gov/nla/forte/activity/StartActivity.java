@@ -7,8 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import au.gov.nla.forte.R;
 import au.gov.nla.forte.db.ForteDB;
-import au.gov.nla.forte.model.PreferencesEnum;
 import au.gov.nla.forte.util.Preferences;
+import au.gov.nla.forte.util.PreferencesEnum;
 
 public class StartActivity extends GlobalActivity {
 	

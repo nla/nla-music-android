@@ -4,8 +4,9 @@
     <string name="app_name">Forte</string>
     <string name="tag_line">Discover our collection of sheet music</string>
     
+    <string name="blank_text"></string>
     <string name="view_nla_website_text">View on National Library of Australia\'s website</string>
     
     <string name="menu_share">Share</string>
-    <string name="menu_bookmark">Bookmark</string>
+    <string name="menu_favourites">Favourites</string>
 </resources>

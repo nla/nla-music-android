@@ -8,7 +8,6 @@ import java.util.HashSet;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import au.gov.nla.forte.model.PreferencesEnum;
 
 public class Preferences {
 	private final static String FILE = "settings";

@@ -3,5 +3,5 @@
     <string name="item_url">http://nla.gov.au/{$pid}</string>
     <string name="thumbnail_url">http://nla.gov.au/{$pid}-t</string>
     <string name="copy_url">http://nla.gov.au/{$pid}-e</string>
-    <string name="oai_url">http://www.nla.gov.au/apps/oaicat/servlet/OAIHandler?verb=GetRecord&amp;metadataPrefix=oai_dc&amp;identifier=oai:nla.gov.au:{$pid}</string>
+    <string name="oai_url">http://www.nla.gov.au/apps/oaicat/servlet/OAIHandler?verb=GetRecord&amp;metadataPrefix=oai_dc&amp;identifier=oai:nla.gov.au:{pid}</string>
 </resources>

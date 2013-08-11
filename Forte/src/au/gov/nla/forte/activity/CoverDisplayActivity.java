@@ -76,7 +76,7 @@ public class CoverDisplayActivity extends GlobalActivity {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = lv1.getItemAtPosition(position);
                 Score score = (Score) o;
-                goToScoreActivity(score.getId());
+                goToScoreActivity(score.getId(), score.getIdentifier());
             }
  
         });
@@ -84,9 +84,10 @@ public class CoverDisplayActivity extends GlobalActivity {
         setTitle(getTitle(year, scores.size()));
     }
     
-    private void goToScoreActivity(String id) {
+    private void goToScoreActivity(String id, String identifier) {
     	Intent i = new Intent(CoverDisplayActivity.this, ScoreActivity.class);
 		i.putExtra(ScoreActivity.SCORE_ID, id);
+		i.putExtra(ScoreActivity.SCORE_IDENTIFIER, identifier);
 		startActivity(i);
     }
     

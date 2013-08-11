@@ -2,6 +2,8 @@ package au.gov.nla.forte.activity;
 
 import java.util.ArrayList;
 
+import org.w3c.dom.Document;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -12,10 +14,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 import au.gov.nla.forte.R;
 import au.gov.nla.forte.db.ForteDBHelper;
 import au.gov.nla.forte.db.Page;
+import au.gov.nla.forte.model.ScoreMetadata;
 import au.gov.nla.forte.task.ImageDownloaderTask;
+import au.gov.nla.forte.task.XmlOaiDownloaderTask;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -24,10 +30,14 @@ import com.actionbarsherlock.view.Window;
 public class ScoreActivity extends GlobalActivity {
 	
 	public static final String SCORE_ID = "SCORE_ID";
+	public static final String SCORE_IDENTIFIER = "SCORE_IDENTIFIER";
 	
 	private String scoreId;
+	private String pid;
 	private int totalPages;
 	private boolean isActionBarShowing;
+	private ScoreMetadata scoreMetadata;
+	private Document doc;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +53,7 @@ public class ScoreActivity extends GlobalActivity {
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.semi_transparent_background));
         
         scoreId = getIntent().getExtras().getString(SCORE_ID);
+        pid = getIntent().getExtras().getString(SCORE_IDENTIFIER);
         ArrayList<Page> pages = getPagesOfScore(scoreId);
         totalPages = pages.size();
         
@@ -60,11 +71,21 @@ public class ScoreActivity extends GlobalActivity {
         viewPager.setAdapter(adapter);
         
         updateTitleWithCurrentPageNumber("1");
+        getScoreMetadata(pid);
     }
     
-    // Get details from OAI in thread
-    // Return Object
-    // Use that to populate screen
+    private void getScoreMetadata(String pid) {
+    	scoreMetadata = new ScoreMetadata();
+    	new XmlOaiDownloaderTask(scoreMetadata).execute(getResources().getString(R.string.oai_url).replace("{pid}", pid));
+    }
+    
+    private void updateMetadataView() {
+    	((TextView)findViewById(R.id.metadata_title)).setText(scoreMetadata.getTitle());
+    	((TextView)findViewById(R.id.metadata_creator)).setText(scoreMetadata.getCreator());
+    	((TextView)findViewById(R.id.metadata_description)).setText(scoreMetadata.getDescription());
+    	((TextView)findViewById(R.id.metadata_date)).setText(scoreMetadata.getDate());
+    	((TextView)findViewById(R.id.metadata_publisher)).setText(scoreMetadata.getPublisher());
+    }
     
     //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
     //startActivity(browserIntent);
@@ -80,7 +101,7 @@ public class ScoreActivity extends GlobalActivity {
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
 			onBackPressed();
-		} else if (id == R.id.menu_bookmark) {
+		} else if (id == R.id.menu_favourites) {
 			// Popup something
 		} else if (id == R.id.menu_share) {
 			// Popup something
@@ -100,6 +121,7 @@ public class ScoreActivity extends GlobalActivity {
         	isActionBarShowing = false;                      
         } else {
         	getSupportActionBar().show();
+        	updateMetadataView();
         	findViewById(R.id.score_metadata).setVisibility(View.VISIBLE);
         	isActionBarShowing = true;
         }			

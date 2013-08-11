@@ -15,17 +15,97 @@
         android:layout_height="250dp"
         android:background="@drawable/semi_transparent_background"
         android:layout_alignParentBottom="true" >
-		
-	    <TextView
-	        android:id="@+id/view_nla_website"
-	    	android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="5dp"
-	        android:gravity="center"
-	        android:singleLine="true"
-	        android:text="@string/view_nla_website_text"
-	        android:textColor="@android:color/white"
-	        android:textSize="@dimen/smallFont"/>
+        
+	    <LinearLayout
+		    android:orientation="horizontal"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent">
+		    
+		    <LinearLayout
+		        android:layout_height="match_parent"
+		        android:layout_width="0dp"
+		        android:layout_weight="3"
+		        android:layout_marginRight="5dp"
+		        android:orientation="vertical">
+		    	
+		        <TextView
+			        android:id="@+id/metadata_title"
+			    	android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="5dp"
+			        android:gravity="center"
+			        android:singleLine="true"
+			        android:text="@string/blank_text"
+			        android:textColor="@android:color/white"
+			        android:textSize="@dimen/mediumFont"/>
+		        
+		        <TextView
+			        android:id="@+id/metadata_creator"
+			    	android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="5dp"
+			        android:gravity="center"
+			        android:singleLine="true"
+			        android:text="@string/blank_text"
+			        android:textColor="@android:color/white"
+			        android:textSize="@dimen/smallFont"/>
+		        
+		        <TextView
+			        android:id="@+id/metadata_description"
+			    	android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="5dp"
+			        android:gravity="center"
+			        android:singleLine="true"
+			        android:text="@string/blank_text"
+			        android:textColor="@android:color/white"
+			        android:textSize="@dimen/smallFont"/>
+		        
+		        <TextView
+			        android:id="@+id/view_nla_website"
+			    	android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="5dp"
+			        android:gravity="center"
+			        android:singleLine="true"
+			        android:text="@string/view_nla_website_text"
+			        android:textColor="@android:color/white"
+			        android:textSize="@dimen/smallFont"/>
+		        
+		    </LinearLayout>
+		    
+		    <LinearLayout
+		        android:layout_height="match_parent"
+		        android:layout_width="0dp"
+		        android:layout_weight="1" 
+		        android:orientation="vertical">
+		        
+		        <TextView
+			        android:id="@+id/metadata_date"
+			    	android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="5dp"
+			        android:gravity="center"
+			        android:singleLine="true"
+			        android:text="@string/blank_text"
+			        android:textColor="@android:color/white"
+			        android:textSize="@dimen/smallFont"/>
+		        
+		        <TextView
+			        android:id="@+id/metadata_publisher"
+			    	android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="5dp"
+			        android:gravity="center"
+			        android:singleLine="true"
+			        android:text="@string/blank_text"
+			        android:textColor="@android:color/white"
+			        android:textSize="@dimen/smallFont"/>
+		        
+		    </LinearLayout>
+		    
+		</LinearLayout>
+	
 
     </RelativeLayout>
 
