@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import au.gov.nla.forte.model.Page;
+import au.gov.nla.forte.model.Score;
 
 public class ForteDBHelper {
 	
@@ -29,21 +31,58 @@ public class ForteDBHelper {
 	public ForteDBHelper(Context ctx) {
 		this.ctx = ctx;
 	}
+	
+	/**
+	 * Counts all the scores in the SCORE_TABLE
+	 */
+	public int countAllScores() {
+		return executeCountQuery("SELECT count(*) FROM " + SCORE_TABLE);
+	}
+	
+	/**
+	 * Counts all the scores in the SCORE_TABLE by year
+	 */
+	public int countScoresByYear(String year) {
+		return executeCountQuery("SELECT count(*) FROM " + SCORE_TABLE + " WHERE " + SCORE_DATE + " = '" + year + "'");
+	}
 
-	// Find All Scores By Year Order By Sort Title ASC
+	/**
+	 *  Find All Scores By Year Order By Sort Title ASC
+	 */
 	public ArrayList<Score> findScoresByYearOrderBySortTitle(String year) {
 		return executeScoreSelectQuery("SELECT * FROM " + SCORE_TABLE + 
 				" WHERE " + SCORE_DATE + " = '" + year + "'" +
 				" ORDER BY " + SCORE_SORTTITLE + " COLLATE NOCASE");
 	}
 	
-	// Find Pages for a Score
+	/**
+	 * Find Pages for a Score
+	 */
 	public ArrayList<Page> findPagesByScoreIdOrderByNumber(String scoreId) {
 			return executePageSelectQuery("SELECT * FROM " + PAGE_TABLE + 
 					" WHERE " + PAGE_SCORE + " = '" + scoreId + "'" +
 					" ORDER BY " + PAGE_NUMBER);
 	}
-
+	
+	private int executeCountQuery(String sql) {
+		int count = 0;
+		
+		openDatabase(true);
+		Cursor cursor = db.rawQuery(sql, null);
+		
+		try {
+			if (cursor != null && cursor.getCount() >= 1) {
+				cursor.moveToFirst();
+				count = cursor.getInt(0);
+			}
+		} finally {
+			cursor.close();
+			closeDatabase();
+		}
+		
+		return count;
+	}
+	
 	private ArrayList<Score> executeScoreSelectQuery(String sql) {
 		openDatabase(true);
 		Cursor cursor = db.rawQuery(sql, null);

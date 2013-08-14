@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -12,8 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import au.gov.nla.forte.R;
 import au.gov.nla.forte.adapter.CustomListAdapter;
+import au.gov.nla.forte.constant.ScoreCount;
 import au.gov.nla.forte.db.ForteDBHelper;
-import au.gov.nla.forte.db.Score;
+import au.gov.nla.forte.model.Score;
 
 //https://github.com/nostra13/Android-Universal-Image-Loader - This looks really good.
 //http://javatechig.com/android/asynchronous-image-loader-in-android-listview/
@@ -31,37 +33,50 @@ public class CoverDisplayActivity extends GlobalActivity {
         String year = getIntent().getExtras().getString(YEAR);
         if (year.equals(DEFAULT_YEAR)) {
         	findViewById(R.id.custom_list).setVisibility(View.INVISIBLE);
-        	addNavigationYearButtons();
         } else {
         	findViewById(R.id.nla_logo).setVisibility(View.INVISIBLE);
         	displayYearList(year);
-        	addNavigationYearButtons();
         }
+        
+        addNavigationYearButtons();
         
     }
     
     private void addNavigationYearButtons() {
     	
-    	for (int i = 1800; i <= 1970; i=i+10) {
-    		LinearLayout ll = (LinearLayout)findViewById(R.id.year_list);
-    	    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-    	            LinearLayout.LayoutParams.MATCH_PARENT,
-    	            LinearLayout.LayoutParams.WRAP_CONTENT);
+    	ScoreCount scoreCount = new ScoreCount();
+    	final int minButtonHeight = (int) (getResources().getDimension(R.dimen.fav_nav_height));
+    	
+    	for (int i = 1800; i <= 1970; i=i+10) {    		
+    		int height = getNavYearButtonHeight(scoreCount.getTotal(), scoreCount.getCountForYear(i), minButtonHeight);
+    		
+    		LinearLayout linearLayout = (LinearLayout)findViewById(R.id.year_list);
+    		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
     	    params.setMargins(0, 0, 0, 0);
     	    
-    	    Button btn = new Button(this);
-    	    btn.setId(i);
-    	    final int id_ = btn.getId();
-    	    btn.setText(""+id_);
-    	    ll.addView(btn, params);
-    	    Button btn1 = ((Button) findViewById(id_));
-    	    btn1.setOnClickListener(new View.OnClickListener() {
+    	    LayoutInflater.from(this).inflate(R.layout.year_button, null);
+    	    
+    	    final int buttonId = i; 
+    	    Button button = (Button)LayoutInflater.from(this).inflate(R.layout.year_button, null);
+    	    button.setId(i);
+    	    button.setText(""+i);
+    	    linearLayout.addView(button, params);
+    	    button.setOnClickListener(new View.OnClickListener() {
     	    	public void onClick(View view) {
-    	    		refreshActivityForYear("" + id_);
+    	    		refreshActivityForYear("" + buttonId);
     	    	}
     	    });
     	}
     	
+    }
+    
+    private int getNavYearButtonHeight(int total, int count, int minHeight) {
+    	final int MIN_COUNT = 200;    	
+    	
+    	if (count <= MIN_COUNT) 
+    		return minHeight;
+    	
+    	return Math.round((count / MIN_COUNT) * minHeight);
     }
     
     private void displayYearList(String year) {
@@ -96,6 +111,9 @@ public class CoverDisplayActivity extends GlobalActivity {
 		i.putExtra(CoverDisplayActivity.YEAR, year);
 		startActivity(i);
 		finish();
+//    	findViewById(R.id.custom_list).setVisibility(View.VISIBLE);
+//		findViewById(R.id.nla_logo).setVisibility(View.INVISIBLE);
+//		displayYearList(year);
 	}
     
     private String getTitle(String year, int total) {

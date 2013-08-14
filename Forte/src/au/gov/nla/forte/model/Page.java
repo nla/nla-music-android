@@ -1,4 +1,4 @@
-package au.gov.nla.forte.db;
+package au.gov.nla.forte.model;
 
 public class Page {
 	

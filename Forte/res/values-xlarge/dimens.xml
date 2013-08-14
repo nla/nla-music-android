@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="smallFont">20sp</dimen>
-    <dimen name="xSmallFont">25sp</dimen>
+    <dimen name="xSmallFont">20sp</dimen>
+    <dimen name="smallFont">25sp</dimen>    
     <dimen name="mediumFont">30sp</dimen>
     <dimen name="largeFont">40sp</dimen>
     <dimen name="veryLargeFont">50sp</dimen>
-    <dimen name="veryVeryLargeFont">60sp</dimen>   
+    <dimen name="veryVeryLargeFont">60sp</dimen>
+    
+    <!-- Year Navigation Sroll List width -->
+    <dimen name="year_nav_width">125dp</dimen>
+    <dimen name="fav_nav_height">100dp</dimen>
+    <dimen name="list_row_layout_thumbnail_width">150dp</dimen>
 </resources>

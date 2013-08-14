@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import au.gov.nla.forte.R;
 import au.gov.nla.forte.db.ForteDBHelper;
-import au.gov.nla.forte.db.Page;
+import au.gov.nla.forte.model.Page;
 import au.gov.nla.forte.model.ScoreMetadata;
 import au.gov.nla.forte.task.ImageDownloaderTask;
 import au.gov.nla.forte.task.XmlOaiDownloaderTask;

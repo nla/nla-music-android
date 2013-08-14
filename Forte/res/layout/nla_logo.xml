@@ -22,7 +22,7 @@
         android:singleLine="true"
         android:text="@string/tag_line"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/smallFont"
+        android:textSize="@dimen/xSmallFont"
         android:textStyle="bold" />
     
 </RelativeLayout>
