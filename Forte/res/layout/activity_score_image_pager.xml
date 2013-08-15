@@ -8,69 +8,83 @@
 		android:id="@+id/view_pager"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent" />
-
-	<RelativeLayout 
-        android:id="@+id/score_metadata"
-        android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:background="@drawable/semi_transparent_background"
-        android:layout_alignParentBottom="true" >
-        
-	    <LinearLayout
-		    android:orientation="horizontal"
-		    android:layout_width="match_parent"
-		    android:layout_height="match_parent">
-		    
+	
+	
+	<LinearLayout 
+	    android:orientation="vertical" 
+	    android:layout_height="fill_parent" 
+	    android:layout_width="fill_parent">
+  	
+	  	<LinearLayout 	  	    
+	  	    android:id="@+id/score_metadata_blank"
+	  	    android:orientation="vertical" 
+	  	    android:layout_weight="0.30" 
+	  	    android:layout_height="fill_parent" 
+	  	    android:layout_width="fill_parent"/>
+	  	
+	  	<LinearLayout 
+	  	    android:id="@+id/score_metadata"
+	  	    android:layout_weight="0.70" 
+	  	    android:layout_height="fill_parent" 
+	  	    android:layout_width="fill_parent"
+	  	    android:baselineAligned="false"
+	  	    android:background="@drawable/semi_transparent_background">
+	  	    
 		    <LinearLayout
 		        android:layout_height="match_parent"
 		        android:layout_width="0dp"
 		        android:layout_weight="3"
-		        android:layout_marginRight="5dp"
+		        android:layout_margin="5dp"
 		        android:orientation="vertical">
-		    	
-		        <TextView
-			        android:id="@+id/metadata_title"
-			    	android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_marginTop="5dp"
-			        android:gravity="center"
-			        android:singleLine="true"
-			        android:text="@string/blank_text"
-			        android:textColor="@android:color/white"
-			        android:textSize="@dimen/mediumFont"/>
 		        
-		        <TextView
-			        android:id="@+id/metadata_creator"
-			    	android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_marginTop="5dp"
-			        android:gravity="center"
-			        android:singleLine="true"
-			        android:text="@string/blank_text"
-			        android:textColor="@android:color/white"
-			        android:textSize="@dimen/smallFont"/>
+		        <RelativeLayout 
+    				android:layout_width="fill_parent" 
+    				android:layout_height="fill_parent">
+    			
+			        <TextView
+				        android:id="@+id/metadata_title"
+				    	android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginTop="5dp"
+				        android:gravity="left"
+				        android:text="@string/blank_text"
+				        android:textColor="@android:color/white"
+				        android:textSize="@dimen/mediumFont"/>
+			        
+			        <TextView
+				        android:id="@+id/metadata_creator"
+				        android:layout_below="@id/metadata_title"
+				    	android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginTop="5dp"
+				        android:gravity="left"
+				        android:text="@string/blank_text"
+				        android:textColor="@android:color/white"
+				        android:textSize="@dimen/xSmallFont"/>
+			        
+			        <TextView
+				        android:id="@+id/metadata_description"
+				        android:layout_below="@id/metadata_creator"
+				    	android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginTop="5dp"
+				        android:gravity="left"
+				        android:text="@string/blank_text"
+				        android:textColor="@android:color/white"
+				        android:textSize="@dimen/xSmallFont"/>
+			        
+			        <TextView
+				        android:id="@+id/view_nla_website"
+				        android:layout_alignParentBottom="true"
+				    	android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginTop="5dp"
+				        android:gravity="left"
+				        android:text="@string/view_nla_website_text"
+				        android:textColor="@android:color/white"
+				        android:textSize="@dimen/xSmallFont"/>
 		        
-		        <TextView
-			        android:id="@+id/metadata_description"
-			    	android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_marginTop="5dp"
-			        android:gravity="center"
-			        android:singleLine="true"
-			        android:text="@string/blank_text"
-			        android:textColor="@android:color/white"
-			        android:textSize="@dimen/smallFont"/>
-		        
-		        <TextView
-			        android:id="@+id/view_nla_website"
-			    	android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_marginTop="5dp"
-			        android:gravity="center"
-			        android:singleLine="true"
-			        android:text="@string/view_nla_website_text"
-			        android:textColor="@android:color/white"
-			        android:textSize="@dimen/smallFont"/>
+		        </RelativeLayout>
 		        
 		    </LinearLayout>
 		    
@@ -78,6 +92,7 @@
 		        android:layout_height="match_parent"
 		        android:layout_width="0dp"
 		        android:layout_weight="1" 
+		        android:layout_margin="5dp"
 		        android:orientation="vertical">
 		        
 		        <TextView
@@ -85,28 +100,25 @@
 			    	android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginTop="5dp"
-			        android:gravity="center"
-			        android:singleLine="true"
+			        android:gravity="right"
 			        android:text="@string/blank_text"
 			        android:textColor="@android:color/white"
-			        android:textSize="@dimen/smallFont"/>
+			        android:textSize="@dimen/xSmallFont"/>
 		        
 		        <TextView
 			        android:id="@+id/metadata_publisher"
 			    	android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginTop="5dp"
-			        android:gravity="center"
-			        android:singleLine="true"
+			        android:gravity="right"
 			        android:text="@string/blank_text"
 			        android:textColor="@android:color/white"
-			        android:textSize="@dimen/smallFont"/>
+			        android:textSize="@dimen/xSmallFont"/>
 		        
 		    </LinearLayout>
 		    
-		</LinearLayout>
+	  	</LinearLayout>
+	  	
+	</LinearLayout>
 	
-
-    </RelativeLayout>
-
 </RelativeLayout>

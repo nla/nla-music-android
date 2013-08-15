@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 import au.gov.nla.forte.R;
+import au.gov.nla.forte.constant.Nla;
 import au.gov.nla.forte.model.Score;
 import au.gov.nla.forte.task.ImageDownloaderTask;
 import au.gov.nla.forte.woozzu.StringMatcher;
@@ -100,7 +101,7 @@ public class CustomListAdapter extends BaseAdapter implements SectionIndexer {
                 .getDrawable(R.drawable.image_thumbnail_placeholder));
         
         if (holder.imageView != null) {
-            new ImageDownloaderTask(holder.imageView).execute(score.getThumbnailUrl());
+            new ImageDownloaderTask(holder.imageView).execute(Nla.getThumbnailUrl(score.getIdentifier()));
         }
  
         return convertView;

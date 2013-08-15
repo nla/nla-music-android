@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.w3c.dom.Document;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import au.gov.nla.forte.R;
+import au.gov.nla.forte.constant.Nla;
 import au.gov.nla.forte.db.ForteDBHelper;
 import au.gov.nla.forte.model.Page;
 import au.gov.nla.forte.model.ScoreMetadata;
@@ -76,7 +79,7 @@ public class ScoreActivity extends GlobalActivity {
     
     private void getScoreMetadata(String pid) {
     	scoreMetadata = new ScoreMetadata();
-    	new XmlOaiDownloaderTask(scoreMetadata).execute(getResources().getString(R.string.oai_url).replace("{pid}", pid));
+    	new XmlOaiDownloaderTask(scoreMetadata).execute(Nla.getOaiUrl(pid));
     }
     
     private void updateMetadataView() {
@@ -85,10 +88,16 @@ public class ScoreActivity extends GlobalActivity {
     	((TextView)findViewById(R.id.metadata_description)).setText(scoreMetadata.getDescription());
     	((TextView)findViewById(R.id.metadata_date)).setText(scoreMetadata.getDate());
     	((TextView)findViewById(R.id.metadata_publisher)).setText(scoreMetadata.getPublisher());
+    	
+    	// Open item in browser
+    	findViewById(R.id.view_nla_website).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Nla.getItemUrl(pid)));
+				startActivity(browserIntent);				
+			}
+		});
     }
-    
-    //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-    //startActivity(browserIntent);
     
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -170,7 +179,7 @@ public class ScoreActivity extends GlobalActivity {
         	
         	Page page = mImages.get(position);
         	
-        	new ImageDownloaderTask(imageView).execute(page.getImageUrl());
+        	new ImageDownloaderTask(imageView).execute(Nla.getImageUrl(page.getIdentifier()));
         	((ViewPager) container).addView(imageView, 0);
         	return imageView;
         }

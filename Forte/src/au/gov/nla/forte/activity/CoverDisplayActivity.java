@@ -48,7 +48,7 @@ public class CoverDisplayActivity extends GlobalActivity {
     	final int minButtonHeight = (int) (getResources().getDimension(R.dimen.fav_nav_height));
     	
     	for (int i = 1800; i <= 1970; i=i+10) {    		
-    		int height = getNavYearButtonHeight(scoreCount.getTotal(), scoreCount.getCountForYear(i), minButtonHeight);
+    		int height = scoreCount.calculateHeight(i, minButtonHeight);
     		
     		LinearLayout linearLayout = (LinearLayout)findViewById(R.id.year_list);
     		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
@@ -68,15 +68,6 @@ public class CoverDisplayActivity extends GlobalActivity {
     	    });
     	}
     	
-    }
-    
-    private int getNavYearButtonHeight(int total, int count, int minHeight) {
-    	final int MIN_COUNT = 200;    	
-    	
-    	if (count <= MIN_COUNT) 
-    		return minHeight;
-    	
-    	return Math.round((count / MIN_COUNT) * minHeight);
     }
     
     private void displayYearList(String year) {

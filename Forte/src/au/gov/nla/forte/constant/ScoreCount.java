@@ -4,11 +4,14 @@ import java.util.HashMap;
 
 public class ScoreCount {
 	
-	private int totalCount = 12146;
+	private int TOTAL_SCORES = 12146;
+	private final int MIN_SCORES_PER_DECADE = 200; 
+	private final int MAX_SCORES_PER_DECADE = 1200;  
+	
 	private HashMap<Integer, Integer> map;
 	
 	public ScoreCount() {
-		map = new HashMap<Integer, Integer>();
+		map = new HashMap<Integer, Integer>(18);
 		map.put(1800, 46);
 		map.put(1810, 4);
 		map.put(1820, 34);
@@ -29,11 +32,15 @@ public class ScoreCount {
 		map.put(1970, 2);
 	}
 	
-	public int getTotal() {
-		return totalCount;
-	}
-	
-	public int getCountForYear(int year) {
-		return map.get(year);
-	}
+	public int calculateHeight(int year, int minHeight) {
+		
+        int numberInDecade = map.get(year);
+        
+        if (numberInDecade > MAX_SCORES_PER_DECADE) 
+            numberInDecade = MAX_SCORES_PER_DECADE;
+        else if (numberInDecade <MIN_SCORES_PER_DECADE)
+            numberInDecade = MIN_SCORES_PER_DECADE;
+    	
+    	return Math.round((numberInDecade / MIN_SCORES_PER_DECADE) * minHeight);
+    }
 }

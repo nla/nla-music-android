@@ -7,15 +7,6 @@ public class Page {
 	private String score;
 	private String identifier;
 	
-	
-	public String getThumbnailUrl() {
-		return "http://nla.gov.au/" + getIdentifier() + "-t";
-	}
-	
-	public String getImageUrl() {
-		return "http://nla.gov.au/" + getIdentifier() + "-e";
-	}
-	
 	public String getId() {
 		return id;
 	}

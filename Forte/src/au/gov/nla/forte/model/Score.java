@@ -9,11 +9,7 @@ public class Score {
 	private String publisher;
 	private String sorttitle;
 	private String title;
-	
-	public String getThumbnailUrl() {
-		return "http://nla.gov.au/" + getIdentifier() + "-t";
-	}
-	
+		
 	public String getId() {
 		return id;
 	}
