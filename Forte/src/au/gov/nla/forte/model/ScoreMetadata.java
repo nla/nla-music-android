@@ -69,7 +69,9 @@ public class ScoreMetadata {
 		} catch (XPathExpressionException e) {
 			Log.e("ScoreMetadata", "Error while parsing OAI xml document with xpath : " + xPathExpr);
 			Log.e("ScoreMetadata", ""+e);
-			return "";
+		} catch (NullPointerException e) {
+			Log.e("ScoreMetadata", "Nullpointer : " + xPathExpr);
+			Log.e("ScoreMetadata", ""+e);			
 		}
 		return "";
 	}
@@ -83,8 +85,11 @@ public class ScoreMetadata {
 		} catch (XPathExpressionException e) {
 			Log.e("ScoreMetadata", "Error while parsing OAI xml document with xpath : " + xPathExpr);
 			Log.e("ScoreMetadata", ""+e);
-			return "";
+		} catch (NullPointerException e) {
+			Log.e("ScoreMetadata", "Nullpointer : " + xPathExpr);
+			Log.e("ScoreMetadata", ""+e);			
 		}
+		return "";
 	}
 
 	public String getTitle() {
