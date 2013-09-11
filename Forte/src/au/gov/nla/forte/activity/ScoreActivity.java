@@ -19,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import au.gov.nla.forte.R;
 import au.gov.nla.forte.constant.Nla;
+import au.gov.nla.forte.db.FavouritesDBHelper;
 import au.gov.nla.forte.db.ForteDBHelper;
+import au.gov.nla.forte.model.Favourite;
 import au.gov.nla.forte.model.Page;
 import au.gov.nla.forte.model.ScoreMetadata;
 import au.gov.nla.forte.task.ImageDownloaderTask;
@@ -96,26 +98,29 @@ public class ScoreActivity extends GlobalActivity {
 			}
 		});
     	
+    	if (isScoreAFavourite()) {
+    		ImageView img = (ImageView)findViewById(R.id.icon_score_fav);
+    		img.setImageResource(R.drawable.icon_action_done);
+    	}	
+    	
     	// Save to Favourites
     	findViewById(R.id.icon_score_fav).setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				
-				// Is score in favourites
-				
-				// No - then add
-				// Start save process
+			public void onClick(View v) {				
 				ImageView img = (ImageView)findViewById(R.id.icon_score_fav);
-				img.setImageResource(R.drawable.icon_action_done);
-				showToastMessageCentred("Score added to Favourites.");
 				
-				// Yes - then remove
-				// Delete it
-				
+				if (isScoreAFavourite()) {
+					deleteFromFavourites();					
+					img.setImageResource(R.drawable.icon_star_white);
+					showToastMessageCentred("Removed from Favourites.");
+					
+				} else {
+					addToFavourites();				
+					img.setImageResource(R.drawable.icon_action_done);
+					showToastMessageCentred("Added to Favourites.");
+				}								
 			}
 		});
-    	
-    	// Share
     }
     
     @Override
@@ -149,6 +154,38 @@ public class ScoreActivity extends GlobalActivity {
         	findViewById(R.id.score_metadata).setVisibility(View.VISIBLE);
         	isActionBarShowing = true;
         }			
+	}
+	
+	private boolean isScoreAFavourite() {
+		FavouritesDBHelper db = new FavouritesDBHelper(this);
+		if (db.findByScore(this.scoreId) != null)
+			return true;
+		else
+			return false;
+	}
+	
+	private void deleteFromFavourites() {
+		
+		// Remove from Database
+		FavouritesDBHelper db = new FavouritesDBHelper(this);
+		db.deleteByScore(this.scoreId);
+		
+		// Delete Files on device
+		// Do as Task
+	}
+	
+	private void addToFavourites() {
+		
+		// Add to Database
+		FavouritesDBHelper db = new FavouritesDBHelper(this);	    	
+	    Favourite f = new Favourite();
+	    f.setIdentifier(this.pid);
+	    f.setScore(this.scoreId);
+	    f.setScoreMetadata(this.scoreMetadata);	    	
+	    db.create(f);
+	    
+	    // Download and Save files
+	    // Do as Task
 	}
 	
 	private void showToastMessageCentred(String msg) {

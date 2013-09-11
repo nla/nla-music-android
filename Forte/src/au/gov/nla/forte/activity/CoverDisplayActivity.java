@@ -37,12 +37,18 @@ public class CoverDisplayActivity extends GlobalActivity {
         	findViewById(R.id.nla_logo).setVisibility(View.INVISIBLE);
         	displayYearList(year);
         }
-        
-        addNavigationYearButtons();
-        
+              
+        addNavigationButtons();
     }
     
-    private void addNavigationYearButtons() {
+    private void addNavigationButtons() {
+    	
+    	findViewById(R.id.favourites).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goToFavouritesActivity();
+			}
+		});
     	
     	ScoreCount scoreCount = new ScoreCount();
     	final int minButtonHeight = (int) (getResources().getDimension(R.dimen.fav_nav_height));
@@ -94,6 +100,11 @@ public class CoverDisplayActivity extends GlobalActivity {
     	Intent i = new Intent(CoverDisplayActivity.this, ScoreActivity.class);
 		i.putExtra(ScoreActivity.SCORE_ID, id);
 		i.putExtra(ScoreActivity.SCORE_IDENTIFIER, identifier);
+		startActivity(i);
+    }
+    
+    private void goToFavouritesActivity() {
+    	Intent i = new Intent(CoverDisplayActivity.this, FavouritesActivity.class);
 		startActivity(i);
     }
     

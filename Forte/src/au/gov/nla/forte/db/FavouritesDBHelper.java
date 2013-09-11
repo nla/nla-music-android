@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import au.gov.nla.forte.model.Favourite;
+import au.gov.nla.forte.model.Score;
 import au.gov.nla.forte.model.ScoreMetadata;
 
 public class FavouritesDBHelper {
@@ -43,13 +44,31 @@ public class FavouritesDBHelper {
 		return rowsDeleted > 0;
 	}
 	
+	public boolean deleteByScore(String score) {
+		String where = FAVOURITES_SCORE + " = '" +score + "'";
+		openDatabase(false);
+		int rowsDeleted = db.delete(FAVOURITES_TABLE, where, null);
+		closeDatabase();
+		return rowsDeleted > 0;
+	}
+	
 	public int countAllFavourites() {
 		return executeCountQuery("SELECT count(*) FROM " + FAVOURITES_TABLE);
 	}
 	
-	public ArrayList<Favourite> findFavouritesOrderBySortTitle() {
+	public ArrayList<Favourite> findAllFavouritesOrderByTitle() {
 		return executeFavouritesSelectQuery("SELECT * FROM " + FAVOURITES_TABLE + 
 				" ORDER BY " + FAVOURITES_TITLE + " COLLATE NOCASE");
+	}
+	
+	public Favourite findByScore(String score) {
+		ArrayList<Favourite> list = executeFavouritesSelectQuery("SELECT * FROM " + FAVOURITES_TABLE + 
+				" WHERE " + FAVOURITES_SCORE + " = '" + score + "'");
+		
+		if (list.size() > 0) 
+			return list.get(0);
+		else
+			return null;
 	}
 	
 	private int executeCountQuery(String sql) {
@@ -137,9 +156,9 @@ public class FavouritesDBHelper {
 	private void openDatabase(boolean readonly) {
 		closeDatabase();
 		if (readonly) {
-			db = (new ForteDB(ctx)).getReadableDatabase();
+			db = (new FavouritesDB(ctx)).getReadableDatabase();
 		} else {
-			db = (new ForteDB(ctx)).getWritableDatabase();
+			db = (new FavouritesDB(ctx)).getWritableDatabase();
 		}
 	}
 
