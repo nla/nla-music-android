@@ -18,4 +18,6 @@
     <dimen name="fav_nav_height">50dp</dimen>
     <dimen name="list_row_layout_thumbnail_width">75dp</dimen>
     
+    <dimen name="score_description_scrollview_height">150dp</dimen>
+    
 </resources>

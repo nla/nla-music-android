@@ -34,7 +34,10 @@
 		        android:layout_height="match_parent"
 		        android:layout_width="0dp"
 		        android:layout_weight="3"
-		        android:layout_margin="10dp"
+		        android:layout_marginLeft="15dp"
+		        android:layout_marginRight="10dp"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginBottom="5dp"
 		        android:orientation="vertical">
 		        
 		        <RelativeLayout 
@@ -62,16 +65,23 @@
 				        android:textColor="@android:color/white"
 				        android:textSize="@dimen/xSmallFont"/>
 			        
-			        <TextView
-				        android:id="@+id/metadata_description"
-				        android:layout_below="@id/metadata_creator"
-				    	android:layout_width="wrap_content"
-				        android:layout_height="wrap_content"
-				        android:layout_marginBottom="5dp"
-				        android:gravity="left"
-				        android:text="@string/blank_text"
-				        android:textColor="@android:color/white"
-				        android:textSize="@dimen/xSmallFont"/>
+			        <ScrollView
+			            android:layout_below="@+id/metadata_creator"
+					    android:layout_width="fill_parent"
+					    android:layout_height="@dimen/score_description_scrollview_height"
+					    android:layout_marginBottom="5dp"
+					    android:fillViewport="true">
+					    
+					    <TextView
+				        	android:id="@+id/metadata_description"				        
+				    		android:layout_width="wrap_content"
+				        	android:layout_height="wrap_content"				        
+				        	android:gravity="left"
+				        	android:text="@string/blank_text"
+				        	android:textColor="@android:color/white"
+				        	android:textSize="@dimen/xSmallFont"/>
+					    
+					</ScrollView>
 			        
 			        <TextView
 				        android:id="@+id/view_nla_website"
@@ -92,29 +102,32 @@
 		        android:layout_height="match_parent"
 		        android:layout_width="0dp"
 		        android:layout_weight="1" 
-		        android:layout_margin="10dp"
+		        android:layout_marginRight="15dp"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginBottom="5dp"
 		        android:orientation="vertical">
 		        
 		        <RelativeLayout 
+		            android:id="@+id/score_icons"
     				android:layout_width="match_parent" 
-    				android:layout_height="match_parent">
+    				android:layout_height="wrap_content">
 			        
 		            <ImageView
-        				android:id="@+id/score_fav"
+        				android:id="@+id/icon_score_fav"
 				        android:layout_width="wrap_content"
-				        android:layout_height="96dp"
-				        android:layout_gravity="center"
+				        android:layout_height="wrap_content"
+				        android:layout_toLeftOf="@+id/icon_share_fav"
 				        android:contentDescription="@string/app_name"
-				        android:background="@drawable/icon_star_white" 
+				        android:src="@drawable/icon_star_white" 
 				        android:scaleType="fitXY" />
 		            
 		            <ImageView
-        				android:id="@+id/score_share"
+        				android:id="@+id/icon_share_fav"
 				        android:layout_width="wrap_content"
-				        android:layout_height="96dp"
-				        android:layout_gravity="center"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentRight="true"
 				        android:contentDescription="@string/app_name"
-				        android:background="@drawable/icon_share_white" 
+				        android:src="@drawable/icon_share_white" 
 				        android:scaleType="fitXY" />
 		            
 			    </RelativeLayout>
@@ -123,6 +136,7 @@
 			        android:id="@+id/metadata_date"
 			    	android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
+			        android:layout_marginTop="10dp"
 			        android:layout_marginBottom="5dp"
 			        android:gravity="right"
 			        android:text="@string/blank_text"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="xSmallFont">15sp</dimen>
+    <dimen name="xSmallFont">12sp</dimen>
     <dimen name="smallFont">18sp</dimen>    
     <dimen name="mediumFont">25sp</dimen>
     <dimen name="largeFont">35sp</dimen>
@@ -11,5 +11,7 @@
     <dimen name="year_nav_width">100dp</dimen>
     <dimen name="fav_nav_height">75dp</dimen>
     <dimen name="list_row_layout_thumbnail_width">125dp</dimen>
+    
+    <dimen name="score_description_scrollview_height">220dp</dimen>
     
 </resources>

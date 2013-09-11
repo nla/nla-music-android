@@ -2,8 +2,6 @@ package au.gov.nla.forte.activity;
 
 import java.util.ArrayList;
 
-import org.w3c.dom.Document;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,7 +39,6 @@ public class ScoreActivity extends GlobalActivity {
 	private int totalPages;
 	private boolean isActionBarShowing;
 	private ScoreMetadata scoreMetadata;
-	private Document doc;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,6 +95,27 @@ public class ScoreActivity extends GlobalActivity {
 				startActivity(browserIntent);				
 			}
 		});
+    	
+    	// Save to Favourites
+    	findViewById(R.id.icon_score_fav).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				// Is score in favourites
+				
+				// No - then add
+				// Start save process
+				ImageView img = (ImageView)findViewById(R.id.icon_score_fav);
+				img.setImageResource(R.drawable.icon_action_done);
+				showToastMessageCentred("Score added to Favourites.");
+				
+				// Yes - then remove
+				// Delete it
+				
+			}
+		});
+    	
+    	// Share
     }
     
     @Override
@@ -110,11 +129,7 @@ public class ScoreActivity extends GlobalActivity {
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
 			onBackPressed();
-		} else if (id == R.id.menu_favourites) {
-			// Popup something
-		} else if (id == R.id.menu_share) {
-			// Popup something
-		}
+		} 
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -134,6 +149,12 @@ public class ScoreActivity extends GlobalActivity {
         	findViewById(R.id.score_metadata).setVisibility(View.VISIBLE);
         	isActionBarShowing = true;
         }			
+	}
+	
+	private void showToastMessageCentred(String msg) {
+		Toast toast= Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);  
+		toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+		toast.show();
 	}
 	
 	private void updateTitleWithCurrentPageNumber(String num) {
