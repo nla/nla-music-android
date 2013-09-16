@@ -30,8 +30,9 @@ import au.gov.nla.forte.task.XmlOaiDownloaderTask;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
-public class ScoreActivity extends GlobalActivity {
+public class ScoreActivity extends BaseActivity {
 	
 	public static final String SCORE_ID = "SCORE_ID";
 	public static final String SCORE_IDENTIFIER = "SCORE_IDENTIFIER";
@@ -39,8 +40,10 @@ public class ScoreActivity extends GlobalActivity {
 	private String scoreId;
 	private String pid;
 	private int totalPages;
+	private ArrayList<Page> pages;
 	private boolean isActionBarShowing;
 	private ScoreMetadata scoreMetadata;
+	private DisplayImageOptions displayImageOptions;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,17 @@ public class ScoreActivity extends GlobalActivity {
         
         scoreId = getIntent().getExtras().getString(SCORE_ID);
         pid = getIntent().getExtras().getString(SCORE_IDENTIFIER);
-        ArrayList<Page> pages = getPagesOfScore(scoreId);
+        pages = getPagesOfScore(scoreId);
         totalPages = pages.size();
+        
+        displayImageOptions = new DisplayImageOptions.Builder()
+				//.showImageOnLoading(R.drawable.image_thumbnail_placeholder)
+				.showImageForEmptyUri(R.drawable.image_placeholder)
+				.showImageOnFail(R.drawable.image_placeholder)
+				.cacheInMemory(true)
+				.cacheOnDisc(true)
+				//.bitmapConfig(Bitmap.Config.RGB_565)
+				.build();
         
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setOnPageChangeListener(new OnPageChangeListener() {
@@ -235,9 +247,8 @@ public class ScoreActivity extends GlobalActivity {
 				}
 			});
         	
-        	Page page = mImages.get(position);
-        	
-        	new ImageDownloaderTask(imageView).execute(Nla.getImageUrl(page.getIdentifier()));
+        	Page page = mImages.get(position);        	
+        	imageLoader.displayImage(Nla.getImageUrl(page.getIdentifier()), imageView, displayImageOptions);        	
         	((ViewPager) container).addView(imageView, 0);
         	return imageView;
         }
@@ -248,27 +259,4 @@ public class ScoreActivity extends GlobalActivity {
         }
      }
 
- // Old Way using horizontal view thing
-//  @Override
-//  public void onCreate(Bundle savedInstanceState) {
-//      super.onCreate(savedInstanceState);
-//      
-//      setContentView(R.layout.activity_score);
-//      myGallery = (LinearLayout)findViewById(R.id.mygallery);
-//      scoreId = getIntent().getExtras().getString(SCORE_ID);
-//      layoutInflater = LayoutInflater.from(this);
-//      
-//      ArrayList<Page> pages = getPagesOfScore(scoreId);
-//      for (Page page : pages){
-//      	System.out.println("******** identifier=" + page.getIdentifier() + " score=" + page.getScore() + " number="+page.getNumber());
-//      	myGallery.addView(insertPage(page));
-//      }
-//  }
-//  
-//  private View insertPage(Page page){    	
-//  	ImageView view = (ImageView) layoutInflater.inflate(R.layout.score_image, null);    	
-//  	new ImageDownloaderTask(view).execute(page.getImageUrl());    	
-//  	return view;
-//  }
-    
 }

@@ -2,6 +2,8 @@ package au.gov.nla.forte.activity;
 
 import java.util.ArrayList;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,15 +22,26 @@ import au.gov.nla.forte.model.Score;
 //https://github.com/nostra13/Android-Universal-Image-Loader - This looks really good.
 //http://javatechig.com/android/asynchronous-image-loader-in-android-listview/
 //ALSO http://android-developers.blogspot.com.au/2010/07/multithreading-for-performance.html
-public class CoverDisplayActivity extends GlobalActivity {
+public class CoverDisplayActivity extends BaseActivity {
 	
 	public static final String YEAR = "year";
 	public static final String DEFAULT_YEAR = "0";
+	
+	private DisplayImageOptions displayImageOptions;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cover_display);
+        
+        displayImageOptions = new DisplayImageOptions.Builder()
+				//.showImageOnLoading(R.drawable.image_thumbnail_placeholder)
+				.showImageForEmptyUri(R.drawable.image_thumbnail_placeholder)
+				.showImageOnFail(R.drawable.image_thumbnail_placeholder)
+				.cacheInMemory(true)
+				.cacheOnDisc(true)
+				//.bitmapConfig(Bitmap.Config.RGB_565)
+				.build();
       
         String year = getIntent().getExtras().getString(YEAR);
         if (year.equals(DEFAULT_YEAR)) {
@@ -80,7 +93,7 @@ public class CoverDisplayActivity extends GlobalActivity {
     	
         ArrayList<Score> scores = getScoresForYear(year);
         final ListView lv1 = (ListView) findViewById(R.id.custom_list);
-        lv1.setAdapter(new CustomListAdapter(this, scores));
+        lv1.setAdapter(new CustomListAdapter(this, scores, displayImageOptions, imageLoader));
         lv1.setFastScrollEnabled(true);
         lv1.setOnItemClickListener(new OnItemClickListener() {
  

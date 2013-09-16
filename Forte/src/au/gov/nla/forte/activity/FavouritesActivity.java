@@ -24,7 +24,7 @@ import au.gov.nla.forte.util.Dialog;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-public class FavouritesActivity extends GlobalActivity  {
+public class FavouritesActivity extends BaseActivity  {
 	
 	private GridView gridView;
 	private CustomGridViewAdapter customGridAdapter;

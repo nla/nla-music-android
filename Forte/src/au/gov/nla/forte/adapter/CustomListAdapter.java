@@ -2,6 +2,9 @@ package au.gov.nla.forte.adapter;
 
 import java.util.ArrayList;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +24,15 @@ public class CustomListAdapter extends BaseAdapter implements SectionIndexer {
 	private String mSections = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private ArrayList<Score> listData;
     private LayoutInflater layoutInflater;
+    private DisplayImageOptions displayImageOptions;
+    private ImageLoader imageLoader;
  
-    public CustomListAdapter(Context context, ArrayList<Score> listData) {
+    public CustomListAdapter(Context context, ArrayList<Score> listData, 
+    		DisplayImageOptions displayImageOptions, ImageLoader imageLoader) {
         this.listData = listData;
-        layoutInflater = LayoutInflater.from(context);
+        this.layoutInflater = LayoutInflater.from(context);
+        this.displayImageOptions = displayImageOptions;
+        this.imageLoader = imageLoader;
     }
     
     // START ALPHABET THING
@@ -97,12 +105,8 @@ public class CustomListAdapter extends BaseAdapter implements SectionIndexer {
  
         holder.titleView.setText(score.getTitle());
         holder.creatorView.setText(score.getCreator());
-        holder.imageView.setImageDrawable(holder.imageView.getContext().getResources()
-                .getDrawable(R.drawable.image_thumbnail_placeholder));
         
-        if (holder.imageView != null) {
-            new ImageDownloaderTask(holder.imageView).execute(Nla.getThumbnailUrl(score.getIdentifier()));
-        }
+        imageLoader.displayImage(Nla.getThumbnailUrl(score.getIdentifier()), holder.imageView, displayImageOptions);
  
         return convertView;
     }

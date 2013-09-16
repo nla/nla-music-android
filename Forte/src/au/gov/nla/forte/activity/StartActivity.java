@@ -1,5 +1,10 @@
 package au.gov.nla.forte.activity;
 
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +15,7 @@ import au.gov.nla.forte.db.ForteDB;
 import au.gov.nla.forte.util.Preferences;
 import au.gov.nla.forte.util.PreferencesEnum;
 
-public class StartActivity extends GlobalActivity {
+public class StartActivity extends BaseActivity {
 	
 	private ProgressDialog progressDialog;
 	
@@ -18,6 +23,10 @@ public class StartActivity extends GlobalActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
+		
+		initImageLoader(getApplicationContext());
+		imageLoader.clearDiscCache();
+		imageLoader.clearDiscCache();
 		
 		int forteDBCopied = Integer.parseInt(Preferences.getPreference(this, PreferencesEnum.FORTE_DATABASE_COPIED, "0"));
 		if (forteDBCopied == 0) {
@@ -34,6 +43,22 @@ public class StartActivity extends GlobalActivity {
 		i.putExtra(CoverDisplayActivity.YEAR, CoverDisplayActivity.DEFAULT_YEAR);
 		startActivity(i);
 		finish();
+	}
+	
+	public static void initImageLoader(Context context) {
+		// This configuration tuning is custom. You can tune every option, you may tune some of them,
+		// or you can create default configuration by
+		//  ImageLoaderConfiguration.createDefault(this);
+		// method.
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+				.threadPriority(Thread.NORM_PRIORITY - 2)
+				.denyCacheImageMultipleSizesInMemory()
+				.discCacheFileNameGenerator(new Md5FileNameGenerator())
+				.tasksProcessingOrder(QueueProcessingType.LIFO)
+				.writeDebugLogs() // Remove for release app
+				.build();
+		// Initialize ImageLoader with configuration.
+		ImageLoader.getInstance().init(config);
 	}
 	
 	/**

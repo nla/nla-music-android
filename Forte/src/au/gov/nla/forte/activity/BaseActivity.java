@@ -9,10 +9,12 @@ import android.view.KeyEvent;
 import au.gov.nla.forte.util.Dialog;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
-public abstract class GlobalActivity extends SherlockActivity {
+public abstract class BaseActivity extends SherlockActivity {
 	
 	private boolean canGoBack = false;
+	protected ImageLoader imageLoader = ImageLoader.getInstance();
 
 	@Override
 	protected void onPostResume() {
