@@ -10,7 +10,7 @@
     <!-- Year Navigation Sroll List width -->
     <dimen name="year_nav_width">100dp</dimen>
     <dimen name="fav_nav_height">75dp</dimen>
-    <dimen name="list_row_layout_thumbnail_width">125dp</dimen>
+    <dimen name="list_row_layout">125dp</dimen>
     
     <dimen name="score_description_scrollview_height">220dp</dimen>
     

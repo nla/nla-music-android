@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="5dp" >
- 
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content">
+    
     <ImageView
         android:id="@+id/grid_item_image"
-        android:layout_width="wrap_content"
-        android:layout_height="250dp"
+        android:layout_width="@dimen/list_row_layout"
+        android:layout_height="@dimen/list_row_layout"
         android:layout_marginRight="5dp"
-        android:src="@drawable/image_thumbnail_placeholder" >
-    </ImageView>
- 
+        android:scaleType="fitXY"
+        android:layout_centerInParent="true" />
+        
     <TextView
-        android:id="@+id/grid_item_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@+id/label"
-        android:layout_marginTop="5dp"
-        android:textSize="@dimen/xSmallFont" >
-    </TextView>
- 
-</LinearLayout>
+	    android:id="@+id/grid_item_label"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@+id/label"
+	    android:textSize="@dimen/xSmallFont"
+	    android:layout_below="@+id/grid_item_image" />
+	        
+</RelativeLayout>

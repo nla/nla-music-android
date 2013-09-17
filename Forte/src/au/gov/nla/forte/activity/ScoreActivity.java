@@ -24,6 +24,7 @@ import au.gov.nla.forte.db.ForteDBHelper;
 import au.gov.nla.forte.model.Favourite;
 import au.gov.nla.forte.model.Page;
 import au.gov.nla.forte.model.ScoreMetadata;
+import au.gov.nla.forte.task.DownloadAndSaveImageTask;
 import au.gov.nla.forte.task.ImageDownloaderTask;
 import au.gov.nla.forte.task.XmlOaiDownloaderTask;
 
@@ -44,6 +45,7 @@ public class ScoreActivity extends BaseActivity {
 	private boolean isActionBarShowing;
 	private ScoreMetadata scoreMetadata;
 	private DisplayImageOptions displayImageOptions;
+	private String dir;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,8 @@ public class ScoreActivity extends BaseActivity {
         pid = getIntent().getExtras().getString(SCORE_IDENTIFIER);
         pages = getPagesOfScore(scoreId);
         totalPages = pages.size();
+        
+        dir = getApplicationContext().getFilesDir().getPath();
         
         displayImageOptions = new DisplayImageOptions.Builder()
 				//.showImageOnLoading(R.drawable.image_thumbnail_placeholder)
@@ -87,6 +91,8 @@ public class ScoreActivity extends BaseActivity {
         
         updateTitleWithCurrentPageNumber("1");
         getScoreMetadata(pid);
+        
+        
     }
     
     private void getScoreMetadata(String pid) {
@@ -196,8 +202,14 @@ public class ScoreActivity extends BaseActivity {
 	    f.setScoreMetadata(this.scoreMetadata);	    	
 	    db.create(f);
 	    
-	    // Download and Save files
-	    // Do as Task
+	    // Download and Save files    
+	    // Thumbnail
+	    new DownloadAndSaveImageTask(dir, (pid + "-t")).execute(Nla.getThumbnailUrl(pid));
+	    
+	    // Pages
+	    for (Page page:pages) {
+	    	new DownloadAndSaveImageTask(dir, (page.getIdentifier() + "-e")).execute(Nla.getImageUrl(page.getIdentifier()));
+	    }
 	}
 	
 	private void showToastMessageCentred(String msg) {

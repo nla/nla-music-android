@@ -1,8 +1,8 @@
 package au.gov.nla.forte.task;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,20 +14,21 @@ import android.graphics.BitmapFactory;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ImageView;
-import au.gov.nla.forte.R;
-import au.gov.nla.forte.model.Page;
  
 public class DownloadAndSaveImageTask extends AsyncTask<String, Void, Bitmap> {
  
-	private String path;
+	private String fileName;
+	private String directory;
 	
-    public DownloadAndSaveImageTask(String path) {
-        this.path = path;
+    public DownloadAndSaveImageTask(String directory, String fileName) {
+        this.fileName = fileName;
+        this.directory = directory;
     }
  
     @Override
-    // Actual download method, run in the task thread
+    /**
+     * params[0] = url of file 
+     */
     protected Bitmap doInBackground(String... params) {
         // params comes from the execute() call: params[0] is the url.
         return downloadBitmap(params[0]);
@@ -37,16 +38,18 @@ public class DownloadAndSaveImageTask extends AsyncTask<String, Void, Bitmap> {
     // Once the image is downloaded, save it
     protected void onPostExecute(Bitmap bitmap) {
         if (isCancelled()) {
-            bitmap = null;
+            return;
+        }
+
+        try {               	
+        	File file = new File(directory, fileName);
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         
-        // Save image
-        
-        //Context.getExternalFilesDir
-        //http://developer.android.com/reference/android/content/Context.html#getExternalFilesDir(java.lang.String)
-        //http://developer.android.com/reference/android/os/Environment.html#getExternalStorageDirectory()
-        //http://stackoverflow.com/questions/649154/save-bitmap-to-location
- 
     }
     
     public Bitmap downloadBitmap(String url) {
