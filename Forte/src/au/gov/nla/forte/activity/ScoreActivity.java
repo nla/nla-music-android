@@ -24,8 +24,8 @@ import au.gov.nla.forte.db.ForteDBHelper;
 import au.gov.nla.forte.model.Favourite;
 import au.gov.nla.forte.model.Page;
 import au.gov.nla.forte.model.ScoreMetadata;
+import au.gov.nla.forte.task.DeleteImageTask;
 import au.gov.nla.forte.task.DownloadAndSaveImageTask;
-import au.gov.nla.forte.task.ImageDownloaderTask;
 import au.gov.nla.forte.task.XmlOaiDownloaderTask;
 
 import com.actionbarsherlock.view.Menu;
@@ -37,6 +37,7 @@ public class ScoreActivity extends BaseActivity {
 	
 	public static final String SCORE_ID = "SCORE_ID";
 	public static final String SCORE_IDENTIFIER = "SCORE_IDENTIFIER";
+	public static final String FAVOURITE = "FAVOURITE";
 	
 	private String scoreId;
 	private String pid;
@@ -45,7 +46,8 @@ public class ScoreActivity extends BaseActivity {
 	private boolean isActionBarShowing;
 	private ScoreMetadata scoreMetadata;
 	private DisplayImageOptions displayImageOptions;
-	private String dir;
+	
+	private boolean isFromFavourites;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,10 +64,9 @@ public class ScoreActivity extends BaseActivity {
         
         scoreId = getIntent().getExtras().getString(SCORE_ID);
         pid = getIntent().getExtras().getString(SCORE_IDENTIFIER);
+        isFromFavourites = Boolean.parseBoolean(getIntent().getExtras().getString(FAVOURITE));
         pages = getPagesOfScore(scoreId);
         totalPages = pages.size();
-        
-        dir = getApplicationContext().getFilesDir().getPath();
         
         displayImageOptions = new DisplayImageOptions.Builder()
 				//.showImageOnLoading(R.drawable.image_thumbnail_placeholder)
@@ -73,7 +74,6 @@ public class ScoreActivity extends BaseActivity {
 				.showImageOnFail(R.drawable.image_placeholder)
 				.cacheInMemory(true)
 				.cacheOnDisc(true)
-				//.bitmapConfig(Bitmap.Config.RGB_565)
 				.build();
         
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -90,14 +90,18 @@ public class ScoreActivity extends BaseActivity {
         viewPager.setAdapter(adapter);
         
         updateTitleWithCurrentPageNumber("1");
-        getScoreMetadata(pid);
-        
-        
+        setScoreMetadata();
     }
     
-    private void getScoreMetadata(String pid) {
+    private void setScoreMetadata() {
     	scoreMetadata = new ScoreMetadata();
-    	new XmlOaiDownloaderTask(scoreMetadata).execute(Nla.getOaiUrl(pid));
+    	if (isFromFavourites) {
+    		FavouritesDBHelper db = new FavouritesDBHelper(this);
+    		Favourite fav = db.findByScore(scoreId);
+    		if (fav != null) scoreMetadata = fav.getScoreMetadata();
+    	} else {    		
+    		new XmlOaiDownloaderTask(scoreMetadata).execute(Nla.getOaiUrl(pid));
+    	}
     }
     
     private void updateMetadataView() {
@@ -131,7 +135,6 @@ public class ScoreActivity extends BaseActivity {
 					deleteFromFavourites();					
 					img.setImageResource(R.drawable.icon_star_white);
 					showToastMessageCentred("Removed from Favourites.");
-					
 				} else {
 					addToFavourites();				
 					img.setImageResource(R.drawable.icon_action_done);
@@ -182,18 +185,23 @@ public class ScoreActivity extends BaseActivity {
 			return false;
 	}
 	
-	private void deleteFromFavourites() {
-		
+	private void deleteFromFavourites() {		
 		// Remove from Database
 		FavouritesDBHelper db = new FavouritesDBHelper(this);
 		db.deleteByScore(this.scoreId);
 		
 		// Delete Files on device
 		// Do as Task
+		// Thumbnail
+	    new DeleteImageTask().execute(filesDir, (pid + Nla.THUMBNAIL));
+	    
+	    // Pages
+	    for (Page page:pages) {
+	    	new DeleteImageTask().execute(filesDir, (page.getIdentifier() + Nla.EXAMINATION_COPY));
+	    }
 	}
 	
-	private void addToFavourites() {
-		
+	private void addToFavourites() {		
 		// Add to Database
 		FavouritesDBHelper db = new FavouritesDBHelper(this);	    	
 	    Favourite f = new Favourite();
@@ -204,11 +212,11 @@ public class ScoreActivity extends BaseActivity {
 	    
 	    // Download and Save files    
 	    // Thumbnail
-	    new DownloadAndSaveImageTask(dir, (pid + "-t")).execute(Nla.getThumbnailUrl(pid));
+	    new DownloadAndSaveImageTask(filesDir, (pid + Nla.THUMBNAIL)).execute(Nla.getThumbnailUrl(pid));
 	    
 	    // Pages
 	    for (Page page:pages) {
-	    	new DownloadAndSaveImageTask(dir, (page.getIdentifier() + "-e")).execute(Nla.getImageUrl(page.getIdentifier()));
+	    	new DownloadAndSaveImageTask(filesDir, (page.getIdentifier() + Nla.EXAMINATION_COPY)).execute(Nla.getImageUrl(page.getIdentifier()));
 	    }
 	}
 	
@@ -259,8 +267,14 @@ public class ScoreActivity extends BaseActivity {
 				}
 			});
         	
-        	Page page = mImages.get(position);        	
-        	imageLoader.displayImage(Nla.getImageUrl(page.getIdentifier()), imageView, displayImageOptions);        	
+        	Page page = mImages.get(position);  
+        	String imageURI;
+        	if (isFromFavourites) {
+        		imageURI = getFileURI(page.getIdentifier() + Nla.EXAMINATION_COPY);
+        	} else {
+        		imageURI = Nla.getImageUrl(page.getIdentifier());
+        	}
+        	imageLoader.displayImage(imageURI, imageView, displayImageOptions);
         	((ViewPager) container).addView(imageView, 0);
         	return imageView;
         }

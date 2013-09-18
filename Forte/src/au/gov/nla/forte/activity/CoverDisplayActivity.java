@@ -113,6 +113,7 @@ public class CoverDisplayActivity extends BaseActivity {
     	Intent i = new Intent(CoverDisplayActivity.this, ScoreActivity.class);
 		i.putExtra(ScoreActivity.SCORE_ID, id);
 		i.putExtra(ScoreActivity.SCORE_IDENTIFIER, identifier);
+		i.putExtra(ScoreActivity.FAVOURITE, "false");
 		startActivity(i);
     }
     

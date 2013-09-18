@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import au.gov.nla.forte.util.Dialog;
 
@@ -15,7 +16,18 @@ public abstract class BaseActivity extends SherlockActivity {
 	
 	private boolean canGoBack = false;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
-
+	protected String filesDir;
+	
+	@Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        filesDir = getApplicationContext().getFilesDir().getPath();
+	}
+	
+	protected String getFileURI(String fileName) {
+		return "file://" + filesDir + "/" + fileName;
+	}
+	
 	@Override
 	protected void onPostResume() {
 		super.onPostResume();

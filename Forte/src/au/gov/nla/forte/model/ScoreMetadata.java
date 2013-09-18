@@ -48,7 +48,7 @@ public class ScoreMetadata {
 		SimpleNamespaceContext namespaces = new SimpleNamespaceContext(prefMap);
 		xpath.setNamespaceContext(namespaces);
 		
-		title = getNodeText(doc, xpath, "//GetRecord/record/metadata/dc/title");
+		title = clean(getNodeText(doc, xpath, "//GetRecord/record/metadata/dc/title"));
 		publisher = getNodeText(doc, xpath, "//GetRecord/record/metadata/dc/publisher");
 		creator = getNodeText(doc, xpath, "//GetRecord/record/metadata/dc/creator");
 		description = getNodeText(doc, xpath, "//GetRecord/record/metadata/dc/description");
@@ -91,7 +91,13 @@ public class ScoreMetadata {
 		}
 		return "";
 	}
-
+	
+	private String clean(String str) {
+		str = str.replace("[music]", "");
+		str = str.replaceAll("/", "");
+		return str;
+	}
+	
 	public String getTitle() {
 		return title;
 	}

@@ -11,4 +11,10 @@
     <dimen name="year_nav_width">125dp</dimen>
     <dimen name="fav_nav_height">100dp</dimen>
     <dimen name="list_row_layout">150dp</dimen>
+    
+    <dimen name="grid_row_height">310dp</dimen>
+    <dimen name="grid_thumbnail_height">200dp</dimen>
+    <dimen name="grid_thumbnail_width">150dp</dimen>
+    
+    <dimen name="score_description_scrollview_height">240dp</dimen>
 </resources>

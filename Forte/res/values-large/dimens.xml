@@ -12,6 +12,10 @@
     <dimen name="fav_nav_height">75dp</dimen>
     <dimen name="list_row_layout">125dp</dimen>
     
+    <dimen name="grid_row_height">175dp</dimen>
+    <dimen name="grid_thumbnail_height">150dp</dimen>
+    <dimen name="grid_thumbnail_width">150dp</dimen>
+    
     <dimen name="score_description_scrollview_height">220dp</dimen>
     
 </resources>

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="fill_parent" 
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/grid_row_height">
     
     <ImageView
         android:id="@+id/grid_item_image"
-        android:layout_width="@dimen/list_row_layout"
-        android:layout_height="@dimen/list_row_layout"
-        android:layout_marginRight="5dp"
+        android:layout_width="@dimen/grid_thumbnail_width"
+        android:layout_height="@dimen/grid_thumbnail_height"
         android:scaleType="fitXY"
         android:layout_centerInParent="true" />
         
@@ -17,6 +16,7 @@
 	    android:layout_height="wrap_content"
 	    android:text="@+id/label"
 	    android:textSize="@dimen/xSmallFont"
-	    android:layout_below="@+id/grid_item_image" />
+	    android:layout_below="@+id/grid_item_image"
+	    android:gravity="center"  />
 	        
 </RelativeLayout>

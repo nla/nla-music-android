@@ -3,8 +3,8 @@ package au.gov.nla.forte.constant;
 public class Nla {
 	
 	private final static String BASE_URL = "http://nla.gov.au/";
-	private final static String THUMBNAIL = "-t";
-	private final static String EXAMINATION_COPY = "-e";
+	public final static String THUMBNAIL = "-t";
+	public final static String EXAMINATION_COPY = "-e";
 	private final static String OAI_URL = "http://www.nla.gov.au/apps/oaicat/servlet/OAIHandler?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:nla.gov.au:";
 	
 	public static String getOaiUrl(String pid) {
