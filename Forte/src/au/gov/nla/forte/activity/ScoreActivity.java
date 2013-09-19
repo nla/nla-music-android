@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import au.gov.nla.forte.R;
@@ -46,6 +48,7 @@ public class ScoreActivity extends BaseActivity {
 	private boolean isActionBarShowing;
 	private ScoreMetadata scoreMetadata;
 	private DisplayImageOptions displayImageOptions;
+	private SeekBar pageControl;
 	
 	private boolean isFromFavourites;
  
@@ -85,9 +88,29 @@ public class ScoreActivity extends BaseActivity {
             	updateTitleWithCurrentPageNumber(""+(position+1));
             }
         });
-              
         ImagePagerAdapter adapter = new ImagePagerAdapter(this, pages);
         viewPager.setAdapter(adapter);
+        
+        pageControl = (SeekBar) findViewById(R.id.page_control);   
+        pageControl.setMax(totalPages);
+        pageControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+            int progressChanged = 0;
+ 
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+                progressChanged = progress;
+                Toast.makeText(ScoreActivity.this,"Page " + progressChanged + " of " + totalPages, 
+                        Toast.LENGTH_SHORT).show();
+            }
+ 
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+ 
+            public void onStopTrackingTouch(SeekBar seekBar) {
+//                Toast.makeText(ScoreActivity.this,"Page " + progressChanged + " of " + totalPages, 
+//                        Toast.LENGTH_SHORT).show();
+            }
+        });
         
         updateTitleWithCurrentPageNumber("1");
         setScoreMetadata();
