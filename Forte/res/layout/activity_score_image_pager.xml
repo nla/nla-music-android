@@ -9,6 +9,12 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent" />
 	
+	<au.gov.nla.forte.layout.SimpleViewPagerIndicator
+    	android:id="@+id/page_indicator"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:gravity="center" />
+	
 	
 	<LinearLayout 
 	    android:orientation="vertical" 

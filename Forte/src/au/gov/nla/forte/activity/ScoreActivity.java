@@ -21,6 +21,7 @@ import au.gov.nla.forte.R;
 import au.gov.nla.forte.constant.Nla;
 import au.gov.nla.forte.db.FavouritesDBHelper;
 import au.gov.nla.forte.db.ForteDBHelper;
+import au.gov.nla.forte.layout.SimpleViewPagerIndicator;
 import au.gov.nla.forte.model.Favourite;
 import au.gov.nla.forte.model.Page;
 import au.gov.nla.forte.model.ScoreMetadata;
@@ -85,9 +86,13 @@ public class ScoreActivity extends BaseActivity {
             	updateTitleWithCurrentPageNumber(""+(position+1));
             }
         });
-              
+        
         ImagePagerAdapter adapter = new ImagePagerAdapter(this, pages);
         viewPager.setAdapter(adapter);
+        
+        SimpleViewPagerIndicator pageIndicator = (SimpleViewPagerIndicator) findViewById(R.id.page_indicator);
+        pageIndicator.setViewPager(viewPager);
+        pageIndicator.notifyDataSetChanged();
         
         updateTitleWithCurrentPageNumber("1");
         setScoreMetadata();
