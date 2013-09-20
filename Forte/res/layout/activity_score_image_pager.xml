@@ -1,28 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent">
+    
+    
     
 	<android.support.v4.view.ViewPager
 		android:id="@+id/view_pager"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent" />
-	
+		android:layout_height="fill_parent" />	
+		
 	<SeekBar
         android:id="@+id/page_control"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:progress="1"
-        android:secondaryProgress="20" />
+        android:progress="0"
+        android:secondaryProgress="100" 
+        android:layout_alignParentBottom="true"/>
+    
+    
+	
+	<TextView
+	    android:id="@+id/current_page_number"
+		android:layout_width="100dp"
+		android:layout_height="100dp"
+		android:layout_margin="10dp"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true"
+		android:gravity="center"
+		android:text="@string/blank_text"
+		android:textColor="@android:color/white"
+		android:textSize="@dimen/veryLargeFont"
+		android:background="@drawable/rounded_corners" />
 	
 	
 	<LinearLayout 
 	    android:orientation="vertical" 
 	    android:layout_height="fill_parent" 
-	    android:layout_width="fill_parent">
-  	
+	    android:layout_width="fill_parent">	    	    
+	    
 	  	<LinearLayout 	  	    
 	  	    android:id="@+id/score_metadata_blank"
 	  	    android:orientation="vertical" 

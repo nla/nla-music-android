@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -49,6 +50,7 @@ public class ScoreActivity extends BaseActivity {
 	private ScoreMetadata scoreMetadata;
 	private DisplayImageOptions displayImageOptions;
 	private SeekBar pageControl;
+	private ViewPager viewPager;
 	
 	private boolean isFromFavourites;
  
@@ -62,6 +64,7 @@ public class ScoreActivity extends BaseActivity {
 		
         setContentView(R.layout.activity_score_image_pager);
         findViewById(R.id.score_metadata).setVisibility(View.INVISIBLE);
+        findViewById(R.id.current_page_number).setVisibility(View.INVISIBLE);
         
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.semi_transparent_background));
         
@@ -79,41 +82,52 @@ public class ScoreActivity extends BaseActivity {
 				.cacheOnDisc(true)
 				.build();
         
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setOnPageChangeListener(new OnPageChangeListener() {
             public void onPageScrollStateChanged(int state) {}
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             public void onPageSelected(int position) {
             	updateTitleWithCurrentPageNumber(""+(position+1));
+            	updatePageControl(position);
             }
         });
         ImagePagerAdapter adapter = new ImagePagerAdapter(this, pages);
         viewPager.setAdapter(adapter);
         
         pageControl = (SeekBar) findViewById(R.id.page_control);   
-        pageControl.setMax(totalPages);
+        pageControl.setMax(totalPages - 1);
         pageControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             int progressChanged = 0;
+            TextView currentPageView = (TextView) findViewById(R.id.current_page_number);
  
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
                 progressChanged = progress;
-                Toast.makeText(ScoreActivity.this,"Page " + progressChanged + " of " + totalPages, 
-                        Toast.LENGTH_SHORT).show();
+                currentPageView.setText(""+(progressChanged + 1));                
             }
  
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-            }
+            	currentPageView.setText(""+(progressChanged + 1)); 
+            	currentPageView.setVisibility(View.VISIBLE);
+            }          
  
             public void onStopTrackingTouch(SeekBar seekBar) {
-//                Toast.makeText(ScoreActivity.this,"Page " + progressChanged + " of " + totalPages, 
-//                        Toast.LENGTH_SHORT).show();
+            	currentPageView.setVisibility(View.INVISIBLE);
+            	scollToPage(progressChanged);
             }
         });
         
         updateTitleWithCurrentPageNumber("1");
         setScoreMetadata();
+    }
+    
+    // Sets the viewpager to the desired page
+    private void scollToPage(int i) {
+    	viewPager.setCurrentItem(i, true); 
+    }
+    
+    private void updatePageControl(int i) {
+    	pageControl.setProgress(i);
     }
     
     private void setScoreMetadata() {
