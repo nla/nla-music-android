@@ -24,6 +24,9 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
+/**
+ * Displays the list of favourites that have been stored offline.
+ */
 public class FavouritesActivity extends BaseActivity  {
 	
 	private final int SCORE_REQUEST_CODE = 1;

@@ -22,6 +22,10 @@ import au.gov.nla.forte.model.Score;
 //https://github.com/nostra13/Android-Universal-Image-Loader - This looks really good.
 //http://javatechig.com/android/asynchronous-image-loader-in-android-listview/
 //ALSO http://android-developers.blogspot.com.au/2010/07/multithreading-for-performance.html
+
+/**
+ * Displays the covers for the scores for the decades.
+ */
 public class CoverDisplayActivity extends BaseActivity {
 	
 	public static final String YEAR = "year";

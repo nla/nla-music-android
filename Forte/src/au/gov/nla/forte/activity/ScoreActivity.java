@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -36,6 +35,10 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
+/**
+ * Displays the Entire Score in pages allowing the user to scroll
+ * through the core, bookmark and share it.
+ */
 public class ScoreActivity extends BaseActivity {
 	
 	public static final String SCORE_ID = "SCORE_ID";
