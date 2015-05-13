@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 12
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "au.gov.nla.forte"
+        minSdkVersion 10
+        targetSdkVersion 22
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:18.0.0'
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.android.support:support-v4:18.0.0'
+    compile files('libs/android-sqlite-asset-helper.jar')
+    compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
+}
