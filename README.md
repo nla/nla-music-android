@@ -16,5 +16,5 @@ Dependencies
 Even though the application has been migrated into Gradle it's worh noting the following libraries and dependencies:
 
 * Forte/libs/universal-image-loader - https://github.com/nostra13/Android-Universal-Image-Loader
-* Forte/libs/android-sqlite-asset-helper - https://github.com/jgilfelt/android-sqlite-asset-helper
+* https://github.com/jgilfelt/android-sqlite-asset-helper - Used for the database related things. Now a gradle dependency.
 
