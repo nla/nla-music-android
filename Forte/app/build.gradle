@@ -25,6 +25,6 @@ dependencies {
     compile 'com.android.support:support-v4:22.0.0'
     compile 'com.android.support:support-v4:22.0.0'
     compile 'com.android.support:appcompat-v7:22.0.+'
-    compile files('libs/android-sqlite-asset-helper.jar')
+    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
 }
