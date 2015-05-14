@@ -1,20 +1,21 @@
 package au.gov.nla.forte.activity;
 
-import java.util.ArrayList;
-
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+
+import java.util.ArrayList;
+
 import au.gov.nla.forte.R;
 import au.gov.nla.forte.adapter.CustomListAdapter;
 import au.gov.nla.forte.constant.ScoreCount;
@@ -39,6 +40,8 @@ public class CoverDisplayActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cover_display);
+
+		addLogoToActionBar();
         
         displayImageOptions = new DisplayImageOptions.Builder()
 				//.showImageOnLoading(R.drawable.image_thumbnail_placeholder)
@@ -63,8 +66,8 @@ public class CoverDisplayActivity extends BaseActivity {
     // Load the Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	// Inflate the menu items for use in the action bar
-    	getSupportMenuInflater().inflate(R.menu.activity_cover_display_menu, menu);
+		getMenuInflater().inflate(R.menu.activity_cover_display_menu, menu);
+		// Inflate the menu items for use in the action bar
 		return super.onCreateOptionsMenu(menu);
     }
     

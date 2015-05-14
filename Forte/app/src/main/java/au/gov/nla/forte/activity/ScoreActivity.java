@@ -30,9 +30,9 @@ import au.gov.nla.forte.task.DeleteImageTask;
 import au.gov.nla.forte.task.DownloadAndSaveImageTask;
 import au.gov.nla.forte.task.XmlOaiDownloaderTask;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 /**
@@ -59,8 +59,10 @@ public class ScoreActivity extends BaseActivity {
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
+		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+		//getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        //requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         showBackButton();
         getSupportActionBar().hide();
 		isActionBarShowing = false;
@@ -186,7 +188,7 @@ public class ScoreActivity extends BaseActivity {
     
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.activity_score, menu);
+		getMenuInflater().inflate(R.menu.activity_score, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
     

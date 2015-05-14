@@ -2,17 +2,18 @@ package au.gov.nla.forte.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.KeyEvent;
+
+import au.gov.nla.forte.R;
 import au.gov.nla.forte.util.Dialog;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import android.support.v7.app.ActionBarActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public abstract class BaseActivity extends SherlockActivity {
+public abstract class BaseActivity extends ActionBarActivity {
 	
 	private boolean canGoBack = false;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
@@ -72,6 +73,17 @@ public abstract class BaseActivity extends SherlockActivity {
 
 	public void showBackButton() {
 		canGoBack = true;
+	}
+
+	/**
+	 * By default the material design has removed the application logo
+	 * This method returns it.
+	 */
+	protected void addLogoToActionBar() {
+		getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME |
+				ActionBar.DISPLAY_SHOW_TITLE |
+				ActionBar.DISPLAY_USE_LOGO);
+		getSupportActionBar().setIcon(R.drawable.icon_app);
 	}
 	
 }
