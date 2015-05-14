@@ -1,11 +1,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="themeBar">#ffffbb33</color>
     
-    <style name="Theme.Default" parent="@style/Theme.Sherlock">
+    <style name="Theme.Default" parent="@style/Theme.AppCompat">
         <item name="android:editTextStyle">@style/WhiteTextAppearance</item>
     </style>
 
-    <style name="Theme.NoTitle" parent="@style/Theme.Sherlock.NoActionBar">
+    <style name="Theme.NoTitle" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:editTextStyle">@style/WhiteTextAppearance</item>
     </style>
 

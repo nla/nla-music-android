@@ -23,10 +23,12 @@
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
         android:text=""
-        android:textColor="@color/abs__primary_text_holo_dark"
+        android:textColor="@color/abc_primary_text_material_dark"
         android:textStyle="bold"
         android:typeface="sans"
         android:textSize="@dimen/smallFont" />
+
+    <!--android:textColor="@color/abs__primary_text_holo_dark"-->
  
     <TextView
         android:id="@+id/creator"
@@ -37,7 +39,9 @@
         android:layout_toRightOf="@id/thumbImage"
         android:paddingLeft="5dp"
         android:text=""
-        android:textColor="@color/abs__primary_text_holo_dark"
+        android:textColor="@color/abc_primary_text_material_dark"
         android:textSize="@dimen/xSmallFont" />
+
+    <!--ndroid:textColor="abs__primary_text_holo_dark-->
  
 </RelativeLayout>

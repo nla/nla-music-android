@@ -1,4 +1,4 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_composers"
         android:icon="@drawable/icon_action_sort_by_size"
