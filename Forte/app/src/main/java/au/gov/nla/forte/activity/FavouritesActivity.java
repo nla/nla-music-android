@@ -20,8 +20,8 @@ import au.gov.nla.forte.constant.Nla;
 import au.gov.nla.forte.db.FavouritesDBHelper;
 import au.gov.nla.forte.model.Favourite;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuItem;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 /**
@@ -68,7 +68,7 @@ public class FavouritesActivity extends BaseActivity  {
     
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.activity_score, menu);
+		getMenuInflater().inflate(R.menu.activity_score, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
     
